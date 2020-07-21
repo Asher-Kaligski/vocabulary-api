@@ -1,0 +1,7 @@
+{
+    "name": "Farm Shop API - Development",
+    "mail": {
+        "host": "development-mail-server"
+    },
+    "jwtPrivateKey": "privateKey"
+}

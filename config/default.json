@@ -1,0 +1,6 @@
+{
+    "name": "Farm Shop API",
+    "jwtPrivateKey": "",
+    "db": "mongodb://localhost/farm-shop"
+    
+}

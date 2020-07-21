@@ -1,0 +1,7 @@
+{
+    "mail": {
+        "password": "farm_mail_password"
+    },
+    "jwtPrivateKey": "farm_jwtPrivateKey",
+    "db": "farm_db"
+}
