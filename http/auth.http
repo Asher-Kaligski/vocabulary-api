@@ -1,0 +1,13 @@
+
+@api = http://localhost:3000/api
+
+
+
+
+POST {{api}}/auth HTTP/1.1
+content-type: application/json
+
+{
+	"email": "admin1234@mail.com",
+	"password": "admin1234"
+}

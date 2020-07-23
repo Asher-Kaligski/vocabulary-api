@@ -1,6 +1,6 @@
 {
-    "name": "Farm Shop API",
+    "name": "Vocabulary API",
     "jwtPrivateKey": "",
-    "db": "mongodb://localhost/farm-shop"
+    "db": "mongodb://localhost/vocabulary"
     
 }

@@ -5,8 +5,8 @@
   "main": "sever.js",
   "scripts": {
     "start": "node server.js",
-    "devStartWindows": "set DEBUG=app:* farm_mail_password=123 farm_jwtPrivateKey=1234 && nodemon server.js",
-    "devStart": "export NODE_ENV=development DEBUG=app:* farm_mail_password=123 farm_jwtPrivateKey=1234 && nodemon server.js"
+    "devStartWindows": "set DEBUG=app:* vocabulary_mail_password=123 vocabulary_jwtPrivateKey=1234 && nodemon server.js",
+    "devStart": "export NODE_ENV=development DEBUG=app:* vocabulary_mail_password=123 vocabulary_jwtPrivateKey=1234 && nodemon server.js"
   },
   "engines": {
     "node": "12.16.3"

@@ -1,0 +1,58 @@
+
+@api = http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjE5ZWJhNzBmYzgyZjI1MjI4NjdlYTUiLCJyb2xlcyI6WyJBRE1JTiJdLCJmaXJzdE5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW4xMjM0QG1haWwuY29tIiwiaWF0IjoxNTk1NTM0NTQ5fQ.ioVD2t8FvWsuzZWo1tx1PQQz29h9gKkfaQTrbnC1zWA
+
+GET {{api}}/letters HTTP/1.1
+
+###
+
+GET {{api}}/letters/names HTTP/1.1
+
+###
+
+GET {{api}}/letters/1 HTTP/1.1
+
+###
+
+POST {{api}}/letters HTTP/1.1
+content-type: application/json
+x-auth-token: {{token}}
+
+{
+    "name": "В",
+    "title": "letter В",
+    "words":[
+        {
+            "name": "some",
+            "description": "something"
+        },
+        {
+            "name": "some1",
+            "description": "something1"
+        }
+    ]
+}
+
+###
+
+PUT {{api}}/letters/2 HTTP/1.1
+content-type: application/json
+x-auth-token: {{token}}
+
+{
+    "name": "В",
+    "title": "letter В",
+    "words":[
+        {
+            "name": "some",
+            "description": "something"
+        },
+        {
+            "name": "some1",
+            "description": "something1"
+        }
+    ]
+}
+
+
+

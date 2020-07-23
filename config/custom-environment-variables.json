@@ -1,7 +1,7 @@
 {
     "mail": {
-        "password": "farm_mail_password"
+        "password": "vocabulary_mail_password"
     },
-    "jwtPrivateKey": "farm_jwtPrivateKey",
-    "db": "farm_db"
+    "jwtPrivateKey": "vocabulary_jwtPrivateKey",
+    "db": "vocabulary_db"
 }
