@@ -2,6 +2,8 @@ const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const mongoose = require('mongoose');
 const { Letter, validate } = require('../models/letter');
+const { Comment } = require('../models/comment');
+const url = require('url');
 const express = require('express');
 const router = express.Router();
 
@@ -13,12 +15,23 @@ router.get('/names', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  const letters = await Letter.find().sort({ letterId: 1 });
-  res.send(letters);
+  const query = url.parse(req.url, true).query;
+
+  if (!query.letter) return res.send(await Letter.find().sort({ letterId: 1 }));
+
+  let letter = await Letter.findOne({ name: query.letter });
+  if (!letter)
+    return res
+      .status(400)
+      .send(`The letter with name ${query.letter} has not been found`);
+
+  res.send(letter);
 });
 
 router.get('/:id', async (req, res) => {
-  let letter = await Letter.findOne({ letterId: req.params.id });
+  let letter = await Letter.findOne({ letterId: req.params.id }).populate(
+    'comments'
+  );
   if (!letter)
     res.status(404).send('The letter with given ID has not been found');
 
@@ -45,11 +58,11 @@ router.post('/', [auth, admin], async (req, res) => {
 
 router.put('/:id', [auth, admin], async (req, res) => {
   const { error } = validate(req.body);
-  if (error) res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send(error.details[0].message);
 
   let letter = await Letter.findOne({ letterId: req.params.id });
   if (!letter)
-    res.status(404).send('The letter with given ID has not been found');
+    return res.status(404).send('The letter with given ID has not been found');
 
   letter.name = req.body.name;
   letter.title = req.body.title;

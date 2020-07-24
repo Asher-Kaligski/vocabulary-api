@@ -1,8 +1,15 @@
 
 @api = http://localhost:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjE5ZWJhNzBmYzgyZjI1MjI4NjdlYTUiLCJyb2xlcyI6WyJBRE1JTiJdLCJmaXJzdE5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW4xMjM0QG1haWwuY29tIiwiaWF0IjoxNTk1NTM0NTQ5fQ.ioVD2t8FvWsuzZWo1tx1PQQz29h9gKkfaQTrbnC1zWA
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjE5ZWJhNzBmYzgyZjI1MjI4NjdlYTUiLCJyb2xlcyI6WyJBRE1JTiJdLCJmaXJzdE5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW4xMjM0QG1haWwuY29tIiwiaWF0IjoxNTk1NTc5NDYyfQ.Ppl6q0955dt4owT_-mNo8QXnSKL5kX838JPc-fKk3bI
 
 GET {{api}}/letters HTTP/1.1
+
+###
+GET {{api}}/letters/?letter=А HTTP/1.1
+
+###
+###
+GET {{api}}/letters/?letter=В HTTP/1.1
 
 ###
 
@@ -10,7 +17,7 @@ GET {{api}}/letters/names HTTP/1.1
 
 ###
 
-GET {{api}}/letters/1 HTTP/1.1
+GET {{api}}/letters/2 HTTP/1.1
 
 ###
 

@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
 const autoincrement = require('simple-mongoose-autoincrement');
+const { commentSchema } = require('./comment');
 
 const MIN_LENGTH = 1;
 const MAX_LENGTH = 10024;
+
 
 const letterSchema = new mongoose.Schema({
   name: {
@@ -34,6 +36,11 @@ const letterSchema = new mongoose.Schema({
       },
     },
   ],
+  comments: 
+  [
+    commentSchema
+  ]
+  
 });
 
 letterSchema.plugin(autoincrement, { field: 'letterId' });

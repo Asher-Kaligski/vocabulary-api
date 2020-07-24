@@ -7,6 +7,7 @@ const startupDebugger = require('debug')('app:startup');
 const routesDebugger = require('debug')('app:routes');
 
 const letters = require ('../routes/letters');
+const comments = require ('../routes/comments');
 const users = require('../routes/users');
 const auth = require('../routes/auth');
 
@@ -27,6 +28,7 @@ module.exports = function (app) {
     app.use(express.json());
 
     app.use('/api/users', users);
+    app.use('/api/comments', comments);
     app.use('/api/letters', letters);
     app.use('/api/auth', auth);
 
