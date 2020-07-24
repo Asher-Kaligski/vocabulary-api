@@ -1,5 +1,6 @@
 
-@api = http://localhost:3000/api
+#@api = http://localhost:3000/api
+@api = https://vocabulary-online.herokuapp.com/api
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjE5ZWJhNzBmYzgyZjI1MjI4NjdlYTUiLCJyb2xlcyI6WyJBRE1JTiJdLCJmaXJzdE5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW4xMjM0QG1haWwuY29tIiwiaWF0IjoxNTk1NTM0NTQ5fQ.ioVD2t8FvWsuzZWo1tx1PQQz29h9gKkfaQTrbnC1zWA
 
 GET {{api}}/users HTTP/1.1
@@ -14,6 +15,6 @@ content-type: application/json
     "firstName": "Admin",
     "lastName": "Admin",
     "phone": "986869",
-    "email": "admin1234@mail.com",
-    "password": "admin1234"
+    "email": "admin4321@gmail.com",
+    "password": "admin4321"
 }

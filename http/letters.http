@@ -1,6 +1,9 @@
 
-@api = http://localhost:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjE5ZWJhNzBmYzgyZjI1MjI4NjdlYTUiLCJyb2xlcyI6WyJBRE1JTiJdLCJmaXJzdE5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW4xMjM0QG1haWwuY29tIiwiaWF0IjoxNTk1NTc5NDYyfQ.Ppl6q0955dt4owT_-mNo8QXnSKL5kX838JPc-fKk3bI
+#@api = http://localhost:3000/api
+
+@api = https://vocabulary-online.herokuapp.com/api
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjFhYmU5NTg4NjkyMzAwMTc2ODQxZWEiLCJyb2xlcyI6WyJBRE1JTiJdLCJmaXJzdE5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW40MzIxQGdtYWlsLmNvbSIsImlhdCI6MTU5NTU4ODUwMH0.QN_NEIR_k3mzCcOCenGZnrltNaazmygkioxeboqorP4
 
 GET {{api}}/letters HTTP/1.1
 
@@ -22,41 +25,32 @@ GET {{api}}/letters/2 HTTP/1.1
 ###
 
 POST {{api}}/letters HTTP/1.1
-content-type: application/json
-x-auth-token: {{token}}
+# content-type: application/json
+# x-auth-token: {{token}}
 
-{
-    "name": "В",
-    "title": "letter В",
-    "words":[
-        {
-            "name": "some",
-            "description": "something"
-        },
-        {
-            "name": "some1",
-            "description": "something1"
-        }
-    ]
-}
+# {
+#     "name": "Я",
+#     "title": "letter Я"
+    
+# }
 
 ###
 
-PUT {{api}}/letters/2 HTTP/1.1
+PUT {{api}}/letters/1 HTTP/1.1
 content-type: application/json
 x-auth-token: {{token}}
 
 {
-    "name": "В",
-    "title": "letter В",
+    "name": "А",
+    "title": "letter А",
     "words":[
         {
             "name": "some",
             "description": "something"
         },
         {
-            "name": "some1",
-            "description": "something1"
+            "name": "some",
+            "description": "something"
         }
     ]
 }

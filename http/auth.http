@@ -1,5 +1,6 @@
 
-@api = http://localhost:3000/api
+#@api = http://localhost:3000/api
+@api = https://vocabulary-online.herokuapp.com/api
 
 
 
@@ -8,6 +9,6 @@ POST {{api}}/auth HTTP/1.1
 content-type: application/json
 
 {
-	"email": "admin1234@mail.com",
-	"password": "admin1234"
+	"email": "admin4321@gmail.com",
+    "password": "admin4321"
 }
