@@ -98,7 +98,7 @@ router.patch('/:id', [auth, admin], async (req, res) => {
     letter.words[index].name = req.body.name;
     letter.words[index].description = req.body.description;
 
-    word = letter.word[index];
+    word = letter.words[index];
   }
 
   await letter.save();
