@@ -107,8 +107,6 @@ router.patch('/:id', [auth, admin], async (req, res) => {
 });
 
 router.delete('/:id/wordId/:wordId', [auth, admin], async (req, res) => {
-  const { error } = validateWord(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
 
   let letter = await Letter.findOne({ letterId: req.params.id });
   if (!letter)
