@@ -95,15 +95,17 @@ router.patch('/:id', [auth, admin], async (req, res) => {
     if (index === -1)
       return res.status(404).send('The word has not been found');
 
-    letter.words[index].name = req.body.name;
-    letter.words[index].description = req.body.description;
 
-    //word = letter.words[index];
+    letter.words[index] = {
+      name: req.body.name,
+      description: req.body.description
+    };
+
+    word = letter.words[index];
   }
 
   await letter.save();
 
-  
   res.send(word);
 });
 
