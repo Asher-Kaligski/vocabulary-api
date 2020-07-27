@@ -92,8 +92,8 @@ router.patch('/:id', [auth, admin], async (req, res) => {
 
     res.send(word);
   } else {
-    await Letter.update(
-      { '_id': letter._id, 'words._id': req.body.wordId },
+     Letter.update(
+      {'words._id': req.body.wordId },
       {
         $set: {
           'words.$.name': req.body.name,
