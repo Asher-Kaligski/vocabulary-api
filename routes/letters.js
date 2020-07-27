@@ -101,9 +101,11 @@ router.patch('/:id', [auth, admin], async (req, res) => {
     word = letter.words[index];
   }
 
+  res.send(word);
+  
   await letter.save();
 
-  res.send(word);
+  
 });
 
 router.delete('/:id/wordId/:wordId', [auth, admin], async (req, res) => {
