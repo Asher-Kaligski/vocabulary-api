@@ -1,7 +1,7 @@
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const mongoose = require('mongoose');
-const { Letter, validate } = require('../models/letter');
+const { Letter, validate, validateWord } = require('../models/letter');
 const { Comment } = require('../models/comment');
 const url = require('url');
 const express = require('express');
@@ -70,6 +70,61 @@ router.put('/:id', [auth, admin], async (req, res) => {
   letter = await letter.save();
 
   res.send(letter);
+});
+
+router.patch('/:id', [auth, admin], async (req, res) => {
+  const { error } = validateWord(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  let letter = await Letter.findOne({ letterId: req.params.id });
+  if (!letter)
+    return res.status(404).send('The letter with given ID has not been found');
+
+  let word;
+  if (!req.body.wordId) {
+    letter.words.push({
+      name: req.body.name,
+      description: req.body.description,
+    });
+    word = letter.words[letter.words - 1];
+  } else {
+    const index = letter.words.findIndex(
+      (w) => w._id.toString() === req.body.wordId
+    );
+
+    if (index === -1)
+      return res.status(404).send('The word has not been found');
+
+    letter.words[index].name = req.body.name;
+    letter.words[index].description = req.body.description;
+
+    word = letter.word[index];
+  }
+
+  await letter.save();
+
+  res.send(word);
+});
+
+router.delete('/:id/wordId/:wordId', [auth, admin], async (req, res) => {
+  const { error } = validateWord(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  let letter = await Letter.findOne({ letterId: req.params.id });
+  if (!letter)
+    return res.status(404).send('The letter with given ID has not been found');
+
+  const index = letter.words.findIndex(
+    (w) => w._id.toString() === req.params.wordId
+  );
+
+  if (index === -1) return res.status(404).send('The word has not been found');
+
+  letter.words.splice(index, 1);
+
+  letter = await letter.save();
+
+  res.send({ response: 'success' });
 });
 
 module.exports = router;

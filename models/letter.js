@@ -55,6 +55,16 @@ function validateLetter(letter) {
 
   return schema.validate(letter);
 }
+function validateWord(word) {
+  const schema = Joi.object({
+    description: Joi.string().min(MIN_LENGTH).max(MAX_LENGTH).required(),
+    name: Joi.string().min(MIN_LENGTH).max(MAX_LENGTH).required(),
+    wordId: Joi.string().default(null),
+  });
+
+  return schema.validate(word);
+}
 
 module.exports.validate = validateLetter;
+module.exports.validateWord = validateWord;
 module.exports.Letter = Letter;
