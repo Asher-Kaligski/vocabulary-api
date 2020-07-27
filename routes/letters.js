@@ -87,22 +87,23 @@ router.patch('/:id', [auth, admin], async (req, res) => {
       description: req.body.description,
     });
     word = letter.words[letter.words - 1];
-
-    await letter.save();
-
-    res.send(word);
   } else {
-    Letter.update(
-      { _id: letter._id, 'words._id': req.body.wordId },
-      {
-        $set: {
-          'words.$.name': req.body.name,
-          'words.$.description': req.body.description,
-        },
-      }
+    const index = letter.words.findIndex(
+      (w) => w._id.toString() === req.body.wordId
     );
-    res.send({ response: 'success' });
+
+    if (index === -1)
+      return res.status(404).send('The word has not been found');
+
+    letter.words[index].name = req.body.name;
+    letter.words[index].description = req.body.description;
+
+    word = letter.words[index];
   }
+
+  await letter.save();
+
+  res.send(word);
 });
 
 router.delete('/:id/wordId/:wordId', [auth, admin], async (req, res) => {
