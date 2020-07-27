@@ -96,8 +96,8 @@ router.patch('/:id', [auth, admin], async (req, res) => {
       { _id: letter._id, 'words._id': req.body.wordId },
       {
         $set: {
-          'items.$.name': req.body.name,
-          'items.$.description': req.body.description,
+          'words.$.name': req.body.name,
+          'words.$.description': req.body.description,
         },
       }
     );
