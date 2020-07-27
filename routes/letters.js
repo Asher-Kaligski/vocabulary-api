@@ -86,7 +86,7 @@ router.patch('/:id', [auth, admin], async (req, res) => {
       name: req.body.name,
       description: req.body.description,
     });
-    word = letter.words[letter.words - 1];
+    word = letter.words[letter.words.length - 1];
   } else {
     const index = letter.words.findIndex(
       (w) => w._id.toString() === req.body.wordId
@@ -107,7 +107,6 @@ router.patch('/:id', [auth, admin], async (req, res) => {
 });
 
 router.delete('/:id/wordId/:wordId', [auth, admin], async (req, res) => {
-
   let letter = await Letter.findOne({ letterId: req.params.id });
   if (!letter)
     return res.status(404).send('The letter with given ID has not been found');
