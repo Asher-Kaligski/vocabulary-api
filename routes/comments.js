@@ -168,16 +168,22 @@ router.post('/:id', auth, async (req, res) => {
   res.send(comment);
 });
 
-/*router.patch('/:id/replyId/:replyId', [auth, admin], async (req, res) => {
-  const { error } = validate(req.body);
+router.patch('/:id/replyId/:replyId', [auth, admin], async (req, res) => {
+  const { error } = validateCommentReply(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   let comment = await Comment.findById(req.params.id);
   if (!comment)
     return res.status(404).send('The comment with given ID has not been found');
 
-  comment.content = req.body.content;
-  comment.isApproved = req.body.isApproved;
+  const replyIndex = comment.replies.findIndex(
+    (r) => r._id.toString() === req.params.replyId
+  );
+  if (replyIndex === -1)
+    return res.status(400).send('The Comment reply has not been found');
+
+  comment.replies[replyIndex].content = req.body.content;
+  comment.replies[replyIndex].isApproved = req.body.isApproved;
 
   comment = await comment.save();
 
@@ -194,15 +200,17 @@ router.post('/:id', auth, async (req, res) => {
 });
 
 router.delete('/:id/replyId/:replyId', [auth, admin], async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
   let comment = await Comment.findById(req.params.id);
   if (!comment)
     return res.status(404).send('The comment with given ID has not been found');
 
-  comment.content = req.body.content;
-  comment.isApproved = req.body.isApproved;
+  const replyIndex = comment.replies.findIndex(
+    (r) => r._id.toString() === req.params.replyId
+  );
+  if (replyIndex === -1)
+    return res.status(400).send('The Comment reply has not been found');
+
+  comment.replies.splice(replyIndex, 1);
 
   comment = await comment.save();
 
@@ -216,6 +224,6 @@ router.delete('/:id/replyId/:replyId', [auth, admin], async (req, res) => {
   await letter.save();
 
   res.send(comment);
-});*/
+});
 
 module.exports = router;
