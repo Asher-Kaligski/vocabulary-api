@@ -98,8 +98,6 @@ router.put('/:id', [auth, admin], async (req, res) => {
 });
 
 router.delete('/:id', [auth, admin], async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
 
   let comment = await Comment.findByIdAndDelete(req.params.id);
   if (!comment)
