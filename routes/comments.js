@@ -147,6 +147,7 @@ router.post('/:id', auth, async (req, res) => {
       lastName: user.lastName,
       phone: user.phone,
     },
+    createAt: new Date(),
   };
 
   if (req.user.roles.includes(ADMIN) && req.body.isApproved)
