@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
-const autoincrement = require('simple-mongoose-autoincrement');
 
 const userShortSchema = new mongoose.Schema({
   firstName: {
