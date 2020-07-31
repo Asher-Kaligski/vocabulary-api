@@ -97,4 +97,24 @@ router.put('/:id', [auth, admin], async (req, res) => {
   res.send(comment);
 });
 
+router.delete('/:id', [auth, admin], async (req, res) => {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  let comment = await Comment.findByIdAndDelete(req.params.id);
+  if (!comment)
+    return res.status(404).send('The comment with given ID has not been found');
+
+  let letter = await Letter.findOne({ name: comment.letterName });
+  const index = letter.comments.findIndex(
+    (c) => c.commentId === comment.commentId
+  );
+
+  if (index !== -1) letter.comments.splice(index, 1);
+
+  await letter.save();
+
+  res.send(comment);
+});
+
 module.exports = router;

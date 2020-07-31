@@ -8,7 +8,6 @@ const routesDebugger = require('debug')('app:routes');
 
 const letters = require('../routes/letters');
 const comments = require('../routes/comments');
-const commentReplies = require('../routes/comment-replies');
 const users = require('../routes/users');
 const auth = require('../routes/auth');
 
@@ -27,7 +26,6 @@ module.exports = function (app) {
 
   app.use('/api/users', users);
   app.use('/api/comments', comments);
-  app.use('/api/comment-replies', commentReplies);
   app.use('/api/letters', letters);
   app.use('/api/auth', auth);
 

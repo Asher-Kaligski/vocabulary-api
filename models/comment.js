@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
 const autoincrement = require('simple-mongoose-autoincrement');
+const { replySchema } = required('./comment-reply');
 
 const MIN_LENGTH = 1;
 const MAX_LENGTH = 10024;
@@ -20,28 +21,6 @@ const userShortSchema = new mongoose.Schema({
     trim: true,
   },
 });
-
-const replyShortSchema = new mongoose.Schema({
- 
-  content: {
-    type: String,
-    required: true,
-    minlength: MIN_LENGTH,
-    maxlength: MAX_LENGTH,
-    required: true,
-  },
-  user: {
-    type: userShortSchema,
-    required: true,
-  },
-  isApproved: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
-});
-
-
 
 const commentSchema = new mongoose.Schema({
   letterName: {
@@ -67,7 +46,7 @@ const commentSchema = new mongoose.Schema({
     required: true,
     default: false,
   },
-  replies: [replyShortSchema]
+  replies: [replySchema],
 });
 
 commentSchema.plugin(autoincrement, { field: 'commentId' });

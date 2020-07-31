@@ -22,10 +22,6 @@ const MIN_LENGTH = 1;
 const MAX_LENGTH = 10024;
 
 const replySchema = new mongoose.Schema({
-  commentId: {
-    type: String,
-    required: true,
-  },
   content: {
     type: String,
     required: true,
@@ -42,14 +38,14 @@ const replySchema = new mongoose.Schema({
     required: true,
     default: false,
   },
+  createAt: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
-replySchema.plugin(autoincrement, { field: 'replyId' });
-const Reply = mongoose.model('Reply', replySchema);
-
-function validateComment(reply) {
+function validateCommentReply(reply) {
   const schema = Joi.object({
-    commentId: Joi.string().required(),
     content: Joi.string().required(),
     userId: Joi.string().required(),
     isApproved: Joi.boolean(),
@@ -58,6 +54,5 @@ function validateComment(reply) {
   return schema.validate(reply);
 }
 
-module.exports.validate = validateComment;
-module.exports.Reply = Reply;
+module.exports.validateCommentReply = validateCommentReply;
 module.exports.replySchema = replySchema;
