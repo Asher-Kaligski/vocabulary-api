@@ -110,7 +110,7 @@ router.patch('/:id', [auth, admin], async (req, res) => {
   res.send(word);
 });
 router.patch('/approve-all/:id', [auth, admin], async (req, res) => {
-  let letter = await Letter.findById(req.params._id).populate('comments');
+  let letter = await Letter.findById(req.params.id).populate('comments');
   if (!letter)
     return res.status(404).send('The letter with given ID has not been found');
 
