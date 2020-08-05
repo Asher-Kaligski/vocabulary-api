@@ -1,5 +1,6 @@
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
+const { ADMIN } = require('../constants/roles');
 const mongoose = require('mongoose');
 const { Letter, validate, validateWord } = require('../models/letter');
 const { Comment } = require('../models/comment');
@@ -17,7 +18,11 @@ router.get('/names', async (req, res) => {
 router.get('/', async (req, res) => {
   const query = url.parse(req.url, true).query;
 
-  if (!query.letter) return res.send(await Letter.find().sort({ letterId: 1 }));
+  if (!query.letter && req.user.roles.includes(ADMIN))
+    return res.send(
+      await Letter.find().populate('comments').sort({ letterId: 1 })
+    );
+  else res.status(403).send('Access Denied');
 
   let letter = await Letter.findOne({ name: query.letter });
   if (!letter)
