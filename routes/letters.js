@@ -18,7 +18,7 @@ router.get('/names', async (req, res) => {
 router.get('/', async (req, res) => {
   const query = url.parse(req.url, true).query;
 
-  if (!query.letter && req.user.roles.includes(ADMIN))
+  if (!query.letter)
     return res.send(
       await Letter.find().populate('comments').sort({ letterId: 1 })
     );
