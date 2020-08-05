@@ -22,7 +22,6 @@ router.get('/', async (req, res) => {
     return res.send(
       await Letter.find().populate('comments').sort({ letterId: 1 })
     );
-  else res.status(403).send('Access Denied');
 
   let letter = await Letter.findOne({ name: query.letter });
   if (!letter)
