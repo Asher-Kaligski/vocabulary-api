@@ -109,6 +109,26 @@ router.patch('/:id', [auth, admin], async (req, res) => {
 
   res.send(word);
 });
+router.patch('/approve-all/:id', [auth, admin], async (req, res) => {
+  let letter = await Letter.findById(req.params._id).populate('comments');
+  if (!letter)
+    return res.status(404).send('The letter with given ID has not been found');
+
+  if (letter.comments)
+    letter.comments.forEach(async (comment) => {
+      if (comment.replies)
+        for (const reply of comment.replies) {
+          if (!reply.isApproved) reply.isApproved = true;
+        }
+      if (!comment.isApproved) comment.isApproved = true;
+
+      await comment.save();
+    });
+
+  await letter.save();
+
+  res.send(letter);
+});
 
 router.delete('/:id/wordId/:wordId', [auth, admin], async (req, res) => {
   let letter = await Letter.findOne({ letterId: req.params.id });
