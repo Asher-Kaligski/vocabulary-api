@@ -5,7 +5,10 @@ const express = require('express');
 var cors = require('cors');
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: 'https://etyvoc-ruseden.herokuapp.com',
+};
+app.use(cors(corsOptions));
 
 require('./core/logging')();
 require('./core/routes')(app);
